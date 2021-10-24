@@ -1,0 +1,78 @@
+--->IIFE: Immediately Invoked Functions
+(function show(){
+console.log("Show function")}()
+
+
+---->Function expression: These are not hoisted
+let sayHi = function() {
+  alert( "Hello" );
+};
+
+
+---> Object manipulation using recursion
+
+var obj = {
+    db: {
+        mongodb: {
+            host: 'localhost'
+        }
+    }
+};
+
+function setValues(key, value, obj){
+  const [head, ...rest] = key.split(".")
+  if (rest.length>0){
+    setValues(rest.join("."), value, obj[head])
+  }else{
+    obj[head] = value
+  }
+}
+
+setValues("db.mongodb.user", "root", obj)
+
+console.log(obj) 
+/*
+{ db: { 
+  mongodb: { 
+    host: 'localhost', 
+    user: 'root' 
+    } 
+    } 
+   }
+}
+*/
+
+---> this in arrow functions refers to window object whereas in normal functions it refers to object which calls the function
+
+---->Bind/ Apply / Call
+// the difference between call( ) apply( ) and bind( )
+// without strict mode "this" will default to the Global/Window obj
+//'use strict';
+
+let bob = function(num, str, x){
+    console.log('bob', num, str, this, x);
+    return true;
+}
+let bill = {
+    name: 'Roger Federer',
+    event: 'Lost to Rafael Nadal',
+    myMethod: function(fn){
+        //fn(2, 'hello');
+        let n = arguments[1];
+        let s = arguments[2];
+        fn.apply(bill, [n, s]);
+        //fn.call(bill, n, s);
+    }
+}
+
+let fred = bob.bind(bill, 5, 'welcome');---> We created partial functions and saved it in variable and provided extra parameter value 'x' at the time of calling 
+fred('x');
+
+//bob(1, 'hello');
+//bill.myMethod(bob);---> this refers to window object.
+//bob.call(bill, 2, 'goodbye');---> First we provide the context where the function executes and then provide parameters. Here this now refers to bill.
+//let arr = [3, 'hi'];
+//bob.apply(bill, arr);---> Same as call but instead of providing parameters separately we need to pass parameters as array.
+//bill.myMethod(bob, 4, 'ciao');
+
+---> Strict mode in javascript does not allow hoisting.
