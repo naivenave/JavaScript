@@ -1,7 +1,5 @@
 // Polyfill for Map
 
-// Polyfill for map function
-
 const newMap=(array, cbfunction)=>{
   try{
     if(!Array.isArray(array)){
@@ -29,7 +27,7 @@ console.log(newMap([],multiply))  // Logs out Please pass non-empty array
 console.log(newMap("[1,2,3,4]",multiply))  // Logs out Please pass an array
 
    
-// Polyfill for map function
+// Polyfill for Filter
 
 const newFilter=(array, cbfunction)=>{
   try{
@@ -59,7 +57,7 @@ console.log(newFilter([1,2,3,4],checkEven)) // In console logs out [ 2, 4 ]
 console.log(newFilter([],checkEven)) // In console logs out Please pass non-empty array
 console.log(newFilter("[1,2,3,4]",checkEven)) // In console logs out "Please pass an array"
 
-// Polyfill for Reduce function
+// Polyfill for Reduce
 
 const newReduce=(cbfunction, array, initial_value)=>{
   try{
